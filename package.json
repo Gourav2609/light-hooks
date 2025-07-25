@@ -1,0 +1,55 @@
+{
+  "name": "light-hooks",
+  "version": "1.0.0",
+  "description": "A collection of useful React hooks including mobile device detection",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "prepublishOnly": "npm run build",
+    "publish:npm": "npm publish --access public",
+    "publish:dry": "npm publish --dry-run --access public",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "mobile",
+    "responsive",
+    "breakpoint",
+    "typescript",
+    "react-hooks",
+    "utilities"
+  ],
+  "author": "Gourav2609",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gourav2609/isMobile.git"
+  },
+  "homepage": "https://github.com/Gourav2609/isMobile#readme",
+  "bugs": {
+    "url": "https://github.com/Gourav2609/isMobile/issues"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/react": "^18.2.45",
+    "rollup": "^4.9.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
+}
