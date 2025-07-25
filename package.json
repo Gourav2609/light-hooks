@@ -34,11 +34,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Gourav2609/isMobile.git"
+    "url": "git+https://github.com/Gourav2609/light-hooks.git"
   },
-  "homepage": "https://github.com/Gourav2609/isMobile#readme",
+  "homepage": "https://github.com/Gourav2609/light-hooks#readme",
   "bugs": {
-    "url": "https://github.com/Gourav2609/isMobile/issues"
+    "url": "https://github.com/Gourav2609/light-hooks/issues"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
