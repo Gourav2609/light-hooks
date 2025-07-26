@@ -1,11 +1,14 @@
 # React Hooks Collection
 
-A collection of useful React hooks starting with `isMobile` - a lightweight hook for detecting mobile devices based on screen width. Perfect for creating responsive components and conditional rendering.
+A collection of useful React hooks for common React development patterns. Build responsive and interactive components with ease.
 
 ## Hooks Included
 
 ### `isMobile`
 Detects mobile devices based on screen width with customizable breakpoints.
+
+### `useClickOutside`
+Detects clicks outside of a specified element - perfect for modals, dropdowns, and tooltips.
 
 ## Features
 
@@ -135,6 +138,86 @@ interface IsMobileOptions {
 declare const isMobile: (options?: IsMobileOptions) => boolean;
 ```
 
+### `useClickOutside(callback, options?)`
+
+Detects clicks outside of a specified element and executes a callback function.
+
+#### Basic Usage
+
+```tsx
+import React, { useState } from 'react';
+import { useClickOutside } from 'light-hooks';
+
+function Modal({ isOpen, onClose }) {
+  const modalRef = useClickOutside(onClose);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div ref={modalRef} className="modal-content">
+        <h2>Modal Title</h2>
+        <p>Click outside to close</p>
+      </div>
+    </div>
+  );
+}
+```
+
+#### Advanced Usage with Options
+
+```tsx
+import React, { useState } from 'react';
+import { useClickOutside } from 'light-hooks';
+
+function Dropdown({ isOpen, onClose }) {
+  const dropdownRef = useClickOutside(onClose, {
+    enabled: isOpen, // Only listen when dropdown is open
+    events: ['mousedown'] // Only listen for mousedown events
+  });
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <button onClick={() => setIsOpen(!isOpen)}>
+        Toggle Dropdown
+      </button>
+      {isOpen && (
+        <div ref={dropdownRef} className="dropdown-menu">
+          <div>Option 1</div>
+          <div>Option 2</div>
+          <div>Option 3</div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+#### Parameters
+
+- `callback`: Function - Called when a click outside the element is detected
+- `options` (optional): Configuration object
+  - `enabled` (optional): Boolean - Whether the hook is active. Default: `true`
+  - `events` (optional): String[] - Array of events to listen for. Default: `['mousedown', 'touchstart']`
+
+#### Returns
+
+- `RefObject<T>`: React ref object to attach to the element you want to detect outside clicks for
+
+#### Types
+
+```tsx
+interface UseClickOutsideOptions {
+  enabled?: boolean;
+  events?: string[];
+}
+
+declare const useClickOutside: <T extends HTMLElement = HTMLElement>(
+  callback: () => void,
+  options?: UseClickOutsideOptions
+) => RefObject<T>;
+```
+
 ## Common Breakpoints
 
 Here are some common breakpoints you might want to use:
@@ -163,9 +246,11 @@ This hook works in all modern browsers that support:
 More hooks are coming soon! Planned additions include:
 - `useLocalStorage` - Local storage management
 - `useDebounce` - Debounced values
-- `useClickOutside` - Detect clicks outside elements
+- ✅ `useClickOutside` - Detect clicks outside elements (Available now!)
 - `useWindowSize` - Window dimensions tracking
 - `useMediaQuery` - CSS media query matching
+- `useToggle` - Simple boolean state management
+- `usePrevious` - Access previous values
 
 ## Contributing
 
