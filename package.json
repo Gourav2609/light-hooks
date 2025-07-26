@@ -1,6 +1,6 @@
 {
   "name": "light-hooks",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A collection of useful React hooks including mobile device detection",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
