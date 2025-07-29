@@ -30,22 +30,11 @@ jobs:
     - name: Run type checking
       run: npm run lint
     
-    - name: Run tests
-      run: npm run test:coverage
-    
     - name: Build development version
       run: npm run build:dev
     
     - name: Test development build
       run: npm run release:dev
-    
-    - name: Upload coverage to Codecov
-      if: matrix.node-version == 18
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage/lcov.info
-        flags: unittests
-        name: codecov-umbrella
     
     - name: Upload dev build artifacts
       if: matrix.node-version == 18

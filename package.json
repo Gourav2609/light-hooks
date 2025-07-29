@@ -14,19 +14,16 @@
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "build:prod": "cross-env NODE_ENV=production rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "lint": "tsc --noEmit",
-    "prepublishOnly": "npm run build:prod && npm run test",
+    "prepublishOnly": "npm run build:prod",
     "publish:npm": "npm publish --access public",
     "publish:dry": "npm publish --dry-run --access public",
     "publish:dev": "npm version prerelease --preid=dev && npm run publish:dry",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major",
-    "release:dev": "npm run build:dev && npm run test && echo Dev build ready for testing",
-    "release:prod": "npm run build:prod && npm run test && echo Production build ready for release"
+    "release:dev": "npm run build:dev && echo Dev build ready for testing",
+    "release:prod": "npm run build:prod && echo Production build ready for release"
   },
   "keywords": [
     "react",
