@@ -5,9 +5,6 @@ const dts = require('rollup-plugin-dts').default;
 const packageJson = require('./package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = process.env.NODE_ENV === 'development';
-
-console.log(`🔧 Building in ${isProduction ? 'PRODUCTION' : isDevelopment ? 'DEVELOPMENT' : 'DEFAULT'} mode`);
 
 const baseConfig = {
   input: 'src/index.ts',
