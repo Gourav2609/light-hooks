@@ -1,4 +1,4 @@
-import { isMobile } from "light-hook";
+import { isMobile } from "light-hooks";
 
 // Basic usage example
 export function BasicExample() {

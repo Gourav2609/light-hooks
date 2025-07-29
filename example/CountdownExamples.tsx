@@ -1,4 +1,4 @@
-import { useCountdown } from "light-hook";
+import { useCountdown } from "light-hooks";
 import { useState } from "react";
 
 // Basic countdown from seconds

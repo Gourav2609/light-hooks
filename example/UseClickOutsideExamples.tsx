@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useClickOutside } from "light-hook";
+import { useClickOutside } from "light-hooks";
 
 // Click outside example - Modal
 export function ModalExample() {
