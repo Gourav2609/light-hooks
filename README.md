@@ -10,6 +10,9 @@ Detects mobile devices based on screen width with customizable breakpoints.
 ### `useClickOutside`
 Detects clicks outside of a specified element - perfect for modals, dropdowns, and tooltips.
 
+### `useCountdown`
+A powerful countdown timer hook with multiple configuration options - perfect for timers, countdowns, and time-based features.
+
 ## Features
 
 - 🚀 **Lightweight**: Minimal bundle size
@@ -218,6 +221,166 @@ declare const useClickOutside: <T extends HTMLElement = HTMLElement>(
 ) => RefObject<T>;
 ```
 
+### `useCountdown(options)`
+
+A versatile countdown timer hook that supports multiple input formats and provides comprehensive timer controls.
+
+#### Basic Usage with Seconds
+
+```tsx
+import React from 'react';
+import { useCountdown } from 'light-hooks';
+
+function BasicTimer() {
+  const { timeLeft, formattedTime } = useCountdown({ initialSeconds: 60 });
+
+  return (
+    <div>
+      <h3>Countdown: {timeLeft} seconds</h3>
+      <p>
+        Time: {formattedTime.minutes}:
+        {formattedTime.seconds.toString().padStart(2, '0')}
+      </p>
+    </div>
+  );
+}
+```
+
+#### Advanced Usage with Controls
+
+```tsx
+import React from 'react';
+import { useCountdown } from 'light-hooks';
+
+function TimerWithControls() {
+  const {
+    timeLeft,
+    isActive,
+    isCompleted,
+    start,
+    pause,
+    reset,
+    formattedTime,
+  } = useCountdown({
+    initialSeconds: 300, // 5 minutes
+    autoStart: false,
+    onComplete: () => alert('Timer finished!')
+  });
+
+  return (
+    <div>
+      <h2>Timer: {formattedTime.minutes}:{formattedTime.seconds.toString().padStart(2, '0')}</h2>
+      <p>Status: {isActive ? 'Running' : 'Paused'}</p>
+      
+      <button onClick={start} disabled={isActive || isCompleted}>
+        Start
+      </button>
+      <button onClick={pause} disabled={!isActive}>
+        Pause
+      </button>
+      <button onClick={reset}>
+        Reset
+      </button>
+      
+      {isCompleted && <p>🎉 Timer completed!</p>}
+    </div>
+  );
+}
+```
+
+#### Countdown to Specific Date
+
+```tsx
+import React from 'react';
+import { useCountdown } from 'light-hooks';
+
+function EventCountdown() {
+  const targetDate = new Date('2024-12-31T23:59:59');
+  const { formattedTime, isCompleted } = useCountdown(targetDate);
+
+  if (isCompleted) {
+    return <h1>🎊 Happy New Year!</h1>;
+  }
+
+  return (
+    <div>
+      <h2>New Year Countdown</h2>
+      <p>
+        {formattedTime.days} days, {formattedTime.hours} hours,{' '}
+        {formattedTime.minutes} minutes, {formattedTime.seconds} seconds
+      </p>
+    </div>
+  );
+}
+```
+
+#### Multiple Input Formats
+
+```tsx
+// Using seconds
+const countdown1 = useCountdown(60);
+
+// Using date object
+const countdown2 = useCountdown(new Date('2024-12-31'));
+
+// Using options object
+const countdown3 = useCountdown({
+  initialSeconds: 300,
+  onComplete: () => console.log('Done!'),
+  autoStart: false
+});
+```
+
+#### Parameters
+
+- `options`: Can be a number (seconds), Date object, or configuration object:
+  - `targetDate` (optional): Date - Countdown to this specific date
+  - `initialSeconds` (optional): Number - Initial countdown time in seconds
+  - `onComplete` (optional): Function - Called when countdown reaches zero
+  - `autoStart` (optional): Boolean - Whether to start automatically. Default: `true`
+  - `interval` (optional): Number - Update interval in milliseconds. Default: `1000`
+
+#### Returns
+
+- `timeLeft`: Number - Remaining time in seconds
+- `isActive`: Boolean - Whether the countdown is currently running
+- `isCompleted`: Boolean - Whether the countdown has finished
+- `start`: Function - Start/resume the countdown
+- `pause`: Function - Pause the countdown
+- `reset`: Function - Reset to initial time
+- `formattedTime`: Object - Time broken down into days, hours, minutes, seconds
+
+#### Types
+
+```tsx
+interface UseCountdownOptions {
+  targetDate?: Date;
+  initialSeconds?: number;
+  onComplete?: () => void;
+  autoStart?: boolean;
+  interval?: number;
+}
+
+interface CountdownReturn {
+  timeLeft: number;
+  isActive: boolean;
+  isCompleted: boolean;
+  start: () => void;
+  pause: () => void;
+  reset: () => void;
+  formattedTime: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+}
+
+declare const useCountdown: (
+  options: UseCountdownOptions | Date | number
+) => CountdownReturn;
+```
+
 ## Common Breakpoints
 
 Here are some common breakpoints you might want to use:
@@ -247,6 +410,7 @@ More hooks are coming soon! Planned additions include:
 - `useLocalStorage` - Local storage management
 - `useDebounce` - Debounced values
 - ✅ `useClickOutside` - Detect clicks outside elements (Available now!)
+- ✅ `useCountdown` - Timer and countdown functionality (Available now!)
 - `useWindowSize` - Window dimensions tracking
 - `useMediaQuery` - CSS media query matching
 - `useToggle` - Simple boolean state management
