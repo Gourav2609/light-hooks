@@ -11,9 +11,21 @@ build/
 # Environment variables
 .env
 .env.local
+.env.development
+.env.production
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Build artifacts
+*.tsbuildinfo
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Development logs
+*.log
 
 # IDE
 .vscode/
