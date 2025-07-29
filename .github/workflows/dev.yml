@@ -1,0 +1,56 @@
+name: Development Workflow
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev, main ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run type checking
+      run: npm run lint
+    
+    - name: Run tests
+      run: npm run test:coverage
+    
+    - name: Build development version
+      run: npm run build:dev
+    
+    - name: Test development build
+      run: npm run release:dev
+    
+    - name: Upload coverage to Codecov
+      if: matrix.node-version == 18
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+    
+    - name: Upload dev build artifacts
+      if: matrix.node-version == 18
+      uses: actions/upload-artifact@v3
+      with:
+        name: dev-build-${{ github.sha }}
+        path: dist/
+        retention-days: 7

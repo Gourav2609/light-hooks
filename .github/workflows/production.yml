@@ -1,0 +1,74 @@
+name: Production Release
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  test-build-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run type checking
+      run: npm run lint
+    
+    - name: Run tests with coverage
+      run: npm run test:coverage
+    
+    - name: Build production version
+      run: npm run build:prod
+    
+    - name: Test production build
+      run: npm run release:prod
+    
+    - name: Publish to NPM (on version tags)
+      if: startsWith(github.ref, 'refs/tags/v')
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    
+    - name: Create GitHub Release (on version tags)
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        body: |
+          ## Changes in this Release
+          
+          **Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ github.event.before }}...${{ github.ref_name }}
+          
+          ## Installation
+          ```bash
+          npm install light-hooks@${{ github.ref_name }}
+          ```
+          
+          ## What's Changed
+          - Check the commits for detailed changes
+        draft: false
+        prerelease: false
+    
+    - name: Upload production build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: production-build-${{ github.ref_name || github.sha }}
+        path: dist/
+        retention-days: 30

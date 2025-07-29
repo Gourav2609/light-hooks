@@ -1,0 +1,22 @@
+{
+  "development": {
+    "sourcemap": true,
+    "minify": false,
+    "verbose": true,
+    "watch": true,
+    "buildTarget": "es2018"
+  },
+  "production": {
+    "sourcemap": false,
+    "minify": true,
+    "verbose": false,
+    "watch": false,
+    "buildTarget": "es2015"
+  },
+  "test": {
+    "sourcemap": true,
+    "minify": false,
+    "verbose": true,
+    "coverage": true
+  }
+}
