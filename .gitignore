@@ -14,15 +14,10 @@ build/
 .env.development
 .env.production
 .env.development.local
-.env.test.local
 .env.production.local
 
 # Build artifacts
 *.tsbuildinfo
-
-# Coverage reports
-coverage/
-.nyc_output/
 
 # Development logs
 *.log
@@ -40,12 +35,6 @@ Thumbs.db
 # Logs
 logs
 *.log
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# nyc test coverage
-.nyc_output
 
 # Dependency directories
 jspm_packages/
