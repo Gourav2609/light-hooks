@@ -20,6 +20,8 @@ npm install light-hooks
 - **Basic Example**: Simple mobile detection with default 768px breakpoint
 - **Custom Breakpoint Example**: Using custom breakpoints (640px and 1024px)
 - **Responsive Navigation**: Real-world example of responsive navigation bar
+- **Countdown Example**: Basic countdown timer using the `useCountdown` hook
+- **Custom Countdown Example**: Countdown with custom duration and callbacks (`CountdownExample.tsx`)
 
 ## Features Demonstrated
 
