@@ -73,3 +73,6 @@ jspm_packages/
 
 # TypeScript
 *.tsbuildinfo
+
+
+/temp
