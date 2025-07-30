@@ -18,6 +18,7 @@ npm install light-hooks
    - `UseClickOutsideExamples.tsx` - useClickOutside hook examples
    - `CountdownExamples.tsx` - useCountdown hook examples
    - `UsePingExamples.tsx` - usePing hook examples
+   - `UseHotKeyExamples.tsx` - useHotKey hook examples
 
 3. Import and use the components in your app
 
@@ -80,6 +81,19 @@ npm install light-hooks
 - Custom ping intervals
 - Multiple endpoint monitoring
 - Loading states and error handling
+
+### useHotKey Hook Examples
+
+[See useHotKey example](./UseHotKeyExamples.tsx)
+
+- Simple key bindings (Enter, F1, Arrow keys)
+- Modifier key combinations (Ctrl+S, Ctrl+C, Alt+1)
+- Cross-platform compatibility (Ctrl vs Cmd)
+- Multiple hotkey configurations
+- Conditional enabling/disabling
+- Input field protection
+- Custom preventDefault and stopPropagation
+- Real-time hotkey status display
 
 ## API Usage Examples
 
@@ -205,3 +219,66 @@ const handlePing = () => {
   ping();
 };
 ```
+
+### useHotKey Basic Usage
+
+```tsx
+import { useHotKey } from 'light-hooks';
+
+// Simple key binding
+useHotKey('Enter', (event) => {
+  console.log('Enter key pressed!');
+});
+
+// Key combination with modifier
+useHotKey(
+  { key: 's', modifiers: ['ctrl'], preventDefault: true },
+  (event) => {
+    console.log('Ctrl+S pressed - Save action!');
+  }
+);
+
+// Function key
+useHotKey('F1', (event) => {
+  console.log('Help action triggered!');
+});
+```
+
+### useHotKey Advanced Usage
+
+```tsx
+import { useHotKey } from 'light-hooks';
+
+// Multiple key combinations for cross-platform support
+useHotKey([
+  { key: 'c', modifiers: ['ctrl'] },  // Windows/Linux
+  { key: 'c', modifiers: ['meta'] }   // Mac
+], (event) => {
+  console.log('Copy action triggered!');
+});
+
+// Conditional hotkey with custom options
+const { isPressed } = useHotKey(
+  { key: 'r', modifiers: ['ctrl', 'shift'], preventDefault: true },
+  (event) => {
+    console.log('Hard refresh triggered!');
+  },
+  {
+    enabled: true,              // Enable/disable hotkey
+    preventDefault: true,       // Prevent browser default
+    stopPropagation: false,     // Allow event bubbling
+    ignoreInputFields: true,    // Ignore when typing in inputs
+    target: document           // Target element (default: document)
+  }
+);
+
+// Arrow keys for navigation
+useHotKey('ArrowUp', () => setCounter(prev => prev + 1));
+useHotKey('ArrowDown', () => setCounter(prev => prev - 1));
+
+// Alt+Number shortcuts for tabs
+useHotKey({ key: '1', modifiers: ['alt'] }, () => switchToTab(1));
+useHotKey({ key: '2', modifiers: ['alt'] }, () => switchToTab(2));
+```
+
+

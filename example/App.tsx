@@ -18,6 +18,7 @@ import {
   MultipleUrlPingExample,
   ManualPingExample,
 } from "./UsePingExamples";
+import { UseHotKeyExamples } from "./UseHotKeyExamples";
 
 // Main App component
 function App() {
@@ -69,6 +70,17 @@ function App() {
           Window height:{" "}
           {typeof window !== "undefined" ? window.innerHeight : "Unknown"}px
         </p>
+      </div>
+
+      {/* useHotKey Hook Examples */}
+      <div
+        style={{
+          marginTop: "40px",
+          borderTop: "2px solid #eee",
+          paddingTop: "20px",
+        }}
+      >
+        <UseHotKeyExamples />
       </div>
     </div>
   );

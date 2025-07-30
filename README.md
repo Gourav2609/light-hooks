@@ -13,6 +13,12 @@ Detects clicks outside of a specified element - perfect for modals, dropdowns, a
 ### `useCountdown`
 A powerful countdown timer hook with multiple configuration options - perfect for timers, countdowns, and time-based features.
 
+### `usePing`
+Monitor network connectivity and measure latency to specific URLs with automatic or manual ping functionality.
+
+### `useHotKey`
+Handle keyboard shortcuts and hotkey combinations with modifier keys, custom options, and flexible configuration.
+
 ## Features
 
 - 🚀 **Lightweight**: Minimal bundle size
@@ -415,6 +421,175 @@ More hooks are coming soon! Planned additions include:
 - `useMediaQuery` - CSS media query matching
 - `useToggle` - Simple boolean state management
 - `usePrevious` - Access previous values
+
+---
+
+## `useHotKey` Hook
+
+The `useHotKey` hook provides a powerful and flexible way to handle keyboard shortcuts and hotkey combinations in your React applications. It supports modifier keys, custom options, and can handle both simple key presses and complex key combinations.
+
+### Features
+
+- ⌨️ **Simple and Complex Hotkeys**: Handle both single keys and key combinations
+- 🔧 **Modifier Keys**: Support for Ctrl, Alt, Shift, and Meta (Cmd) keys
+- 🎯 **Multiple Configurations**: Define multiple hotkey combinations for a single action
+- 🛡️ **Input Field Protection**: Automatically ignores hotkeys when typing in input fields
+- ⚙️ **Customizable Options**: Control preventDefault, stopPropagation, and target elements
+- 🎮 **Event Access**: Callback receives the original KeyboardEvent
+- 🔄 **Enable/Disable**: Dynamically enable or disable hotkeys
+
+### Basic Usage
+
+```typescript
+import { useHotKey } from 'light-hooks';
+
+function MyComponent() {
+  // Simple key binding
+  useHotKey('Enter', (event) => {
+    console.log('Enter pressed!');
+  });
+
+  // Key combination with modifier
+  useHotKey(
+    { key: 's', modifiers: ['ctrl'], preventDefault: true },
+    (event) => {
+      console.log('Ctrl+S pressed - Save action!');
+    }
+  );
+
+  return <div>Press Enter or Ctrl+S</div>;
+}
+```
+
+### Advanced Usage
+
+```typescript
+import { useHotKey } from 'light-hooks';
+
+function AdvancedComponent() {
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  // Multiple key combinations for the same action
+  useHotKey([
+    { key: 'c', modifiers: ['ctrl'] },  // Ctrl+C on Windows/Linux
+    { key: 'c', modifiers: ['meta'] }   // Cmd+C on Mac
+  ], (event) => {
+    console.log('Copy action triggered!');
+  });
+
+  // Function keys
+  useHotKey('F1', (event) => {
+    console.log('Help triggered!');
+  });
+
+  // Arrow keys for navigation
+  useHotKey('ArrowUp', (event) => {
+    console.log('Navigate up');
+  });
+
+  // Conditional hotkey
+  useHotKey(
+    { key: 'r', modifiers: ['ctrl'] },
+    (event) => {
+      console.log('Refresh triggered!');
+    },
+    { 
+      enabled: isEnabled,
+      preventDefault: true,
+      ignoreInputFields: false  // Allow in input fields
+    }
+  );
+
+  return (
+    <div>
+      <button onClick={() => setIsEnabled(!isEnabled)}>
+        {isEnabled ? 'Disable' : 'Enable'} Ctrl+R
+      </button>
+    </div>
+  );
+}
+```
+
+### Parameters
+
+#### `useHotKey(hotKeyConfig, callback, options?)`
+
+- **`hotKeyConfig`**: `HotKeyConfig | HotKey | (HotKeyConfig | HotKey)[]`
+  - Configuration for the hotkey(s) to listen for
+  - Can be a simple key string, a configuration object, or an array of either
+
+- **`callback`**: `(event: KeyboardEvent) => void`
+  - Function to call when the hotkey is triggered
+  - Receives the original KeyboardEvent as parameter
+
+- **`options`**: `UseHotKeyOptions` (optional)
+  - Additional configuration options
+
+### Returns
+
+#### `UseHotKeyResult`
+
+```typescript
+{
+  isPressed: boolean  // Whether the hotkey is currently being pressed
+}
+```
+
+### Types
+
+#### `HotKeyConfig`
+
+```typescript
+interface HotKeyConfig {
+  key: HotKey;                    // The main key
+  modifiers?: ModifierKey[];      // Optional modifier keys
+  preventDefault?: boolean;       // Prevent default browser behavior
+  stopPropagation?: boolean;      // Stop event propagation
+}
+```
+
+#### `UseHotKeyOptions`
+
+```typescript
+interface UseHotKeyOptions {
+  enabled?: boolean;              // Enable/disable the hotkey (default: true)
+  preventDefault?: boolean;       // Global preventDefault setting
+  stopPropagation?: boolean;      // Global stopPropagation setting
+  target?: HTMLElement | Document; // Target element to listen on (default: document)
+  ignoreInputFields?: boolean;    // Ignore hotkeys in input fields (default: true)
+}
+```
+
+#### `ModifierKey`
+
+```typescript
+type ModifierKey = 'ctrl' | 'alt' | 'shift' | 'meta';
+```
+
+#### `HotKey`
+
+Supports all standard keyboard keys including:
+- **Letters**: `'a'` to `'z'`
+- **Numbers**: `'0'` to `'9'`
+- **Function Keys**: `'F1'` to `'F12'`
+- **Special Keys**: `'Enter'`, `'Escape'`, `'Tab'`, `'Space'`, etc.
+- **Arrow Keys**: `'ArrowUp'`, `'ArrowDown'`, `'ArrowLeft'`, `'ArrowRight'`
+- **Symbols**: `'!'`, `'@'`, `'#'`, etc.
+
+### Examples
+
+The library includes comprehensive examples in `UseHotKeyExamples.tsx`:
+
+- Simple key bindings
+- Modifier key combinations
+- Multiple hotkey configurations
+- Function key usage
+- Conditional hotkey enabling
+- Cross-platform compatibility (Ctrl vs Cmd)
+- Arrow key navigation
+- Number and symbol shortcuts
+
+---
 
 ## Contributing
 
