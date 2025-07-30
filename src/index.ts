@@ -22,7 +22,6 @@ export {
   useHotKey,
   type HotKeyConfig,
   type UseHotKeyOptions,
-  type UseHotKeyResult,
 } from "./useHotKey";
 
 // Future hooks will be exported here

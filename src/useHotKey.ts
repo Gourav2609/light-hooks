@@ -130,10 +130,6 @@ export interface UseHotKeyOptions {
   ignoreInputFields?: boolean;
 }
 
-export interface UseHotKeyResult {
-  /** Whether any of the configured hotkeys is currently being pressed */
-  isPressed: boolean;
-}
 
 /**
  * Keymap to normalize key names to handle browser inconsistencies and provide
@@ -244,7 +240,7 @@ const matchesHotKey = (
  *   - target: DOM element to attach listeners to (default: document)
  *   - ignoreInputFields: Whether to ignore hotkeys in input fields (default: true)
  *
- * @returns Object with isPressed boolean indicating if hotkey is currently pressed
+ * @returns boolean indicating if hotkey is currently pressed
  *
  * @example
  * // Simple key binding
@@ -268,7 +264,7 @@ export const useHotKey = (
   hotKeyConfig: HotKeyConfig | HotKey | (HotKeyConfig | HotKey)[],
   callback: () => void,
   options: UseHotKeyOptions = {}
-): UseHotKeyResult => {
+): boolean => {
   // Destructure options with defaults
   const {
     enabled = true, // Enable/disable the entire hotkey functionality
@@ -373,7 +369,6 @@ export const useHotKey = (
     };
   }, [enabled, target, handleKeyDown, handleKeyUp]);
 
-  return {
-    isPressed: isPressedRef.current,
-  };
+  return isPressedRef.current;
+
 };

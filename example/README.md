@@ -258,7 +258,7 @@ useHotKey([
 });
 
 // Conditional hotkey with custom options
-const { isPressed } = useHotKey(
+const isPressed = useHotKey(
   { key: 'r', modifiers: ['ctrl', 'shift'], preventDefault: true },
   (event) => {
     console.log('Hard refresh triggered!');
