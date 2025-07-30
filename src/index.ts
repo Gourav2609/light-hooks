@@ -14,6 +14,9 @@ export {
   type CountdownReturn,
 } from "./useCountdown";
 
+// Ping hook
+export { usePing, type PingOptions, type PingResult } from "./usePing";
+
 // Future hooks will be exported here
 // export { useLocalStorage } from './useLocalStorage';
 // export { useDebounce } from './useDebounce';

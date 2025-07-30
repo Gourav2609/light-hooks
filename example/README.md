@@ -17,6 +17,7 @@ npm install light-hooks
    - `IsMobileExamples.tsx` - isMobile hook examples
    - `UseClickOutsideExamples.tsx` - useClickOutside hook examples
    - `CountdownExamples.tsx` - useCountdown hook examples
+   - `UsePingExamples.tsx` - usePing hook examples
 
 3. Import and use the components in your app
 
@@ -41,6 +42,13 @@ npm install light-hooks
 - **Long Countdown**: Extended countdown showing days, hours, minutes, seconds (25+ hours)
 - **Timer Example**: Interactive timer with preset durations and completion alerts
 
+### usePing Hook
+
+- **Basic Ping**: Simple network latency monitoring with status indicators
+- **Custom Interval Ping**: Ping with custom intervals (2 seconds) to different endpoints
+- **Multiple URL Monitoring**: Monitor multiple services simultaneously (Google, GitHub, HTTPBin)
+- **Manual Ping**: Example with auto-start disabled for manual control
+
 ## Features Demonstrated
 
 [See isMobile example](./IsMobileExamples.tsx)
@@ -64,6 +72,14 @@ npm install light-hooks
 - Completion callbacks and status tracking
 - Formatted time output (days, hours, minutes, seconds)
 - Custom update intervals
+
+[See usePing example](./UsePingExamples.tsx)
+
+- Network latency monitoring
+- Online/offline status detection
+- Custom ping intervals
+- Multiple endpoint monitoring
+- Loading states and error handling
 
 ## API Usage Examples
 
@@ -149,4 +165,43 @@ const {
   onComplete: () => console.log('Time\'s up!'),
   interval: 1000
 });
+```
+
+### usePing Basic Usage
+
+```tsx
+import { usePing } from 'light-hooks';
+
+// Simple ping monitoring
+const { latency, isLive, isLoading } = usePing("https://api.example.com");
+
+// Custom interval and fallback
+const { latency, isLive, lastPingTime } = usePing({
+  url: "https://api.example.com",
+  interval: 3000,           // Ping every 3 seconds
+  fallbackLatency: 999,     // Show 999ms when offline
+  autoStart: true           // Start automatically
+});
+```
+
+### usePing Advanced Usage
+
+```tsx
+const {
+  latency,        // Current latency in milliseconds
+  isLive,         // Whether the endpoint is reachable
+  isLoading,      // Whether a ping is currently in progress
+  lastPingTime,   // Date of last ping attempt
+  ping            // Manual ping function
+} = usePing({
+  url: "https://api.example.com",
+  interval: 5000,           // Optional: Default 5000ms
+  fallbackLatency: 0,       // Optional: Default 0ms
+  autoStart: false          // Optional: Default true
+});
+
+// Manual ping
+const handlePing = () => {
+  ping();
+};
 ```

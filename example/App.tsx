@@ -12,6 +12,12 @@ import {
   CountdownLongExample,
   CountdownTimerExample,
 } from "./CountdownExamples";
+import {
+  BasicPingExample,
+  CustomIntervalPingExample,
+  MultipleUrlPingExample,
+  ManualPingExample,
+} from "./UsePingExamples";
 
 // Main App component
 function App() {
@@ -44,6 +50,12 @@ function App() {
       <CountdownDateExample />
       <CountdownLongExample />
       <CountdownTimerExample />
+
+      <h2>usePing Hook</h2>
+      <BasicPingExample />
+      <CustomIntervalPingExample />
+      <MultipleUrlPingExample />
+      <ManualPingExample />
 
       <div
         style={{ padding: "20px", backgroundColor: "#f9f9f9", margin: "10px" }}
