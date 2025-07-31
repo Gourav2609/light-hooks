@@ -19,6 +19,9 @@ Monitor network connectivity and measure latency to specific URLs with automatic
 ### `useHotKey`
 Handle keyboard shortcuts and hotkey combinations with modifier keys, custom options, and flexible configuration.
 
+### `useEvent`
+Handle multiple event listeners with flexible targeting options, event delegation, and performance optimizations.
+
 ## Features
 
 - 🚀 **Lightweight**: Minimal bundle size
@@ -588,6 +591,146 @@ The library includes comprehensive examples in `UseHotKeyExamples.tsx`:
 - Cross-platform compatibility (Ctrl vs Cmd)
 - Arrow key navigation
 - Number and symbol shortcuts
+
+---
+
+## `useEvent` Hook
+
+The `useEvent` hook provides advanced event handling capabilities with flexible element targeting, event delegation patterns, and performance optimizations. Perfect for complex applications requiring sophisticated event management.
+
+### Features
+
+- 🎯 **Flexible Targeting**: Target elements by ID, tag name, or both
+- 🔄 **Multiple Events**: Handle different event types with single hook
+- ⚡ **Event Delegation**: Efficient handling of dynamic content
+- ⚙️ **Advanced Options**: Support for passive, capture, and once options
+- 🎮 **Dynamic Config**: Real-time configuration updates
+- 🧹 **Auto Cleanup**: Automatic event listener cleanup on unmount
+- 📊 **Performance**: Optimized for high-frequency events
+
+### Basic Usage
+
+```typescript
+import { useEvent } from 'light-hooks';
+
+function MyComponent() {
+  // Simple event binding to all buttons
+  useEvent(
+    (e) => console.log('Button clicked:', e.target),
+    'click',
+    { targetElements: 'button' }
+  );
+
+  // Multiple events with specific targeting
+  useEvent(
+    (e) => console.log('Event:', e.type),
+    [
+      { event: 'click', ids: 'submit-btn' },
+      { event: 'mouseover', targetElements: ['button', 'a'] }
+    ],
+    { targetElements: 'div' }
+  );
+
+  return <div>/* Your JSX */</div>;
+}
+```
+
+### Advanced Usage
+
+```typescript
+import { useEvent } from 'light-hooks';
+
+function AdvancedComponent() {
+  // Event delegation for dynamic content
+  useEvent(
+    (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('delete-btn')) {
+        const id = target.dataset.itemId;
+        deleteItem(id);
+      }
+    },
+    'click',
+    { targetElements: 'button' }
+  );
+
+  // Performance-optimized scroll handling
+  useEvent(
+    (e) => handleScroll(e),
+    {
+      event: 'scroll',
+      targetElements: 'div',
+      options: { passive: true }
+    },
+    {}
+  );
+
+  // Capture phase event handling
+  useEvent(
+    (e) => interceptAllClicks(e),
+    {
+      event: 'click',
+      targetElements: 'body',
+      options: { capture: true }
+    },
+    {}
+  );
+
+  return <div>/* Your JSX */</div>;
+}
+```
+
+### Parameters
+
+#### `useEvent(callback, eventOptions, globalConfig?)`
+
+- **`callback`**: `(event: Event) => void`
+  - Function called when events are triggered
+  - Receives the native Event object
+
+- **`eventOptions`**: `EventOptions | EventOptions[] | string`
+  - String: Simple event name (uses global config for targeting)
+  - Object: Detailed event configuration
+  - Array: Multiple event configurations
+
+- **`globalConfig`**: `EventGlobalConfig` (optional)
+  - Default configuration for all events
+  - Individual event configs override global settings
+
+### Types
+
+#### `EventOptions`
+
+```typescript
+interface EventOptions {
+  event: string;                          // Event type ('click', 'scroll', etc.)
+  targetElements?: string | string[];     // Target by tag name
+  ids?: string | string[];                // Target by element ID
+  callback?: (event: Event) => void;      // Event-specific callback
+  options?: AddEventListenerOptions;      // Native addEventListener options
+}
+```
+
+#### `EventGlobalConfig`
+
+```typescript
+interface EventGlobalConfig {
+  targetElements?: string | string[];     // Default target elements
+  ids?: string | string[];                // Default target IDs
+  options?: AddEventListenerOptions;      // Default listener options
+}
+```
+
+### Examples
+
+The library includes comprehensive examples in `UseEventExamples.tsx`:
+
+- Simple event binding with automatic targeting
+- Multiple event types with flexible configuration
+- Event delegation patterns for dynamic content
+- Advanced options (passive, capture, once)
+- Dynamic configuration updates
+- Performance optimization techniques
 
 ---
 
