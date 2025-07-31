@@ -19,6 +19,7 @@ npm install light-hooks
    - `CountdownExamples.tsx` - useCountdown hook examples
    - `UsePingExamples.tsx` - usePing hook examples
    - `UseHotKeyExamples.tsx` - useHotKey hook examples
+   - `UseEventExamples.tsx` - useEvent hook examples
 
 3. Import and use the components in your app
 
@@ -94,6 +95,19 @@ npm install light-hooks
 - Input field protection
 - Custom preventDefault and stopPropagation
 - Real-time hotkey status display
+
+### useEvent Hook Examples
+
+[See useEvent example](./UseEventExamples.tsx)
+
+- Simple event binding to multiple elements
+- Multiple event types with flexible targeting
+- Event delegation patterns for dynamic content
+- Advanced options (passive, capture, once)
+- Dynamic configuration changes
+- Performance-optimized event handling
+- ID and tag-based element targeting
+- Global configuration with local overrides
 
 ## API Usage Examples
 
