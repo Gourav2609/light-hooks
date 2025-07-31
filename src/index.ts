@@ -25,7 +25,7 @@ export {
 } from "./useHotKey";
 
 // Event handler hook
-export { useEvent } from "./useEvent";
+export { useEvent, type EventOptions,type EventGlobalConfig } from "./useEvent";
 
 // Future hooks will be exported here
 // export { useLocalStorage } from './useLocalStorage';
