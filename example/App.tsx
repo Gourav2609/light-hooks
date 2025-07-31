@@ -20,6 +20,7 @@ import {
 } from "./UsePingExamples";
 import { UseHotKeyExamples } from "./UseHotKeyExamples";
 import { UseEventExamples } from "./UseEventExamples";
+import UsePermissionExamples from "./UsePermissionExamples";
 
 // Main App component
 function App() {
@@ -93,6 +94,17 @@ function App() {
         }}
       >
         <UseEventExamples />
+      </div>
+
+      {/* usePermission Hook Examples */}
+      <div
+        style={{
+          marginTop: "40px",
+          borderTop: "2px solid #eee",
+          paddingTop: "20px",
+        }}
+      >
+        <UsePermissionExamples />
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ npm install light-hooks
    - `UsePingExamples.tsx` - usePing hook examples
    - `UseHotKeyExamples.tsx` - useHotKey hook examples
    - `UseEventExamples.tsx` - useEvent hook examples
+   - `UsePermissionExamples.tsx` - usePermission hook examples
 
 3. Import and use the components in your app
 
@@ -48,6 +49,17 @@ npm install light-hooks
 
 - **Basic Ping**: Simple network latency monitoring with status indicators
 - **Custom Interval Ping**: Ping with custom intervals (2 seconds) to different endpoints
+- **Multiple URL Monitoring**: Monitor multiple services simultaneously (Google, GitHub, HTTPBin)
+- **Manual Ping**: Example with auto-start disabled for manual control
+
+### usePermission Hook
+
+- **Basic Permission**: Single permission request (geolocation) with status display
+- **Multiple Permissions**: Request and monitor multiple permissions at once
+- **MIDI with SysEx**: MIDI device access with optional System Exclusive support
+- **Camera & Microphone**: Individual and combined media device permissions
+- **Notifications**: Browser notification permission with test notification feature
+- **Status Monitor**: Real-time monitoring dashboard for multiple permission states
 - **Multiple URL Monitoring**: Monitor multiple services simultaneously (Google, GitHub, HTTPBin)
 - **Manual Ping**: Example with auto-start disabled for manual control
 
@@ -83,7 +95,7 @@ npm install light-hooks
 - Multiple endpoint monitoring
 - Loading states and error handling
 
-### useHotKey Hook Examples
+
 
 [See useHotKey example](./UseHotKeyExamples.tsx)
 
@@ -96,7 +108,7 @@ npm install light-hooks
 - Custom preventDefault and stopPropagation
 - Real-time hotkey status display
 
-### useEvent Hook Examples
+
 
 [See useEvent example](./UseEventExamples.tsx)
 
@@ -108,6 +120,19 @@ npm install light-hooks
 - Performance-optimized event handling
 - ID and tag-based element targeting
 - Global configuration with local overrides
+
+
+
+[See usePermission example](./UsePermissionExamples.tsx)
+
+- Single and multiple permission management
+- Real-time permission status monitoring
+- Camera, microphone, geolocation, notifications support
+- MIDI device access with SysEx options
+- Automatic status updates when permissions change
+- Loading states and error handling
+- Interactive permission request buttons
+- Cross-browser compatibility checks
 
 ## API Usage Examples
 
@@ -295,4 +320,67 @@ useHotKey({ key: '1', modifiers: ['alt'] }, () => switchToTab(1));
 useHotKey({ key: '2', modifiers: ['alt'] }, () => switchToTab(2));
 ```
 
+### usePermission Basic Usage
+
+```tsx
+import { usePermission } from 'light-hooks';
+
+// Single permission
+const { permissionStatus, requestPermissions } = usePermission('camera');
+
+// Multiple permissions
+const { permissionStatus, requestPermissions } = usePermission([
+  'camera', 
+  'microphone', 
+  'notifications'
+]);
+
+// Check permission status
+if (permissionStatus[0]?.state === 'granted') {
+  // Permission is granted, can use camera
+}
+
+// Request permission from user
+await requestPermissions();
+```
+
+### usePermission Advanced Usage
+
+```tsx
+import { usePermission } from 'light-hooks';
+
+// MIDI with SysEx support
+const { permissionStatus, requestPermissions, isLoading, error } = usePermission({
+  name: 'midi',
+  sysex: true  // Enable System Exclusive access
+});
+
+// Advanced usage with all options
+const {
+  permissionStatus,    // Array of PermissionStatus objects
+  requestPermissions,  // Function to request permissions (may show prompts)
+  checkPermissions,    // Function to check status without requesting
+  isLoading,          // Whether permission checks are in progress
+  error               // Error message if operations failed
+} = usePermission(['geolocation', 'notifications']);
+
+// Manual permission check
+const handleRefresh = async () => {
+  await checkPermissions();
+};
+
+// Request specific permission
+const handleRequestLocation = async () => {
+  await requestPermissions();
+  if (permissionStatus[0]?.state === 'granted') {
+    // Use geolocation API
+    navigator.geolocation.getCurrentPosition(successCallback);
+  }
+};
+
+// Monitor permission changes (automatic)
+useEffect(() => {
+  console.log('Permission states:', permissionStatus.map(p => p?.state));
+}, [permissionStatus]);
+```
 
