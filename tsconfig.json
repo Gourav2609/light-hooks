@@ -5,7 +5,7 @@
       "dom",
       "dom.iterable",
       "es6",
-      "es2024" 
+      "ESNext" 
       // "ES2016.Array.Include"
     ],
     "allowJs": true,

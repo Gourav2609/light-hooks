@@ -19,6 +19,7 @@ import {
   ManualPingExample,
 } from "./UsePingExamples";
 import { UseHotKeyExamples } from "./UseHotKeyExamples";
+import { UseEventExamples } from "./UseEventExamples";
 
 // Main App component
 function App() {
@@ -81,6 +82,17 @@ function App() {
         }}
       >
         <UseHotKeyExamples />
+      </div>
+
+      {/* useEvent Hook Examples */}
+      <div
+        style={{
+          marginTop: "40px",
+          borderTop: "2px solid #eee",
+          paddingTop: "20px",
+        }}
+      >
+        <UseEventExamples />
       </div>
     </div>
   );

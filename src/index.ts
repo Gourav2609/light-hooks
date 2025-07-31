@@ -24,6 +24,9 @@ export {
   type UseHotKeyOptions,
 } from "./useHotKey";
 
+// Event handler hook
+export { useEvent } from "./useEvent";
+
 // Future hooks will be exported here
 // export { useLocalStorage } from './useLocalStorage';
 // export { useDebounce } from './useDebounce';
