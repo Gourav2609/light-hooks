@@ -27,6 +27,12 @@ export {
 // Event handler hook
 export { useEvent, type EventOptions,type EventGlobalConfig } from "./useEvent";
 
+// LocalStorage hook
+export {
+  useLocalStorage,
+  type UseLocalStorageReturn,
+  type UseLocalStorageOptions,
+} from "./useLocalStorage";
+
 // Future hooks will be exported here
-// export { useLocalStorage } from './useLocalStorage';
 // export { useDebounce } from './useDebounce';
