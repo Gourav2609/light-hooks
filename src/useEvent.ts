@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /** Configuration for a single event listener */
-interface EventOptions {
+export interface EventOptions {
   /** The event type to listen for (e.g., 'click', 'mouseover', 'keydown') */
   event: string;
   /** Target elements by tag name (e.g., 'button', 'div', 'input') */
@@ -15,7 +15,7 @@ interface EventOptions {
 }
 
 /** Global configuration that serves as fallback for individual event options */
-interface EventGlobalConfig {
+export interface EventGlobalConfig {
   /** Default target elements by tag name */
   targetElements?: string | string[];
   /** Default target elements by ID */
@@ -25,7 +25,7 @@ interface EventGlobalConfig {
 }
 
 /** Internal structure for tracking active event listeners */
-interface ElementCallback {
+ interface ElementCallback {
   /** The event type being listened to */
   event: string;
   /** HTML elements that have this listener attached */

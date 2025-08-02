@@ -20,6 +20,13 @@ import {
 } from "./UsePingExamples";
 import { UseHotKeyExamples } from "./UseHotKeyExamples";
 import { UseEventExamples } from "./UseEventExamples";
+import {
+  BasicLocalStorageExample,
+  UserPreferencesExample,
+  ShoppingCartExample,
+  FormPersistenceExample,
+  SettingsWithValidationExample,
+} from "./UseLocalStorageExamples";
 
 // Main App component
 function App() {
@@ -94,6 +101,14 @@ function App() {
       >
         <UseEventExamples />
       </div>
+
+      {/* useLocalStorage Hook Examples */}
+      <h2>useLocalStorage Hook</h2>
+      <BasicLocalStorageExample />
+      <UserPreferencesExample />
+      <ShoppingCartExample />
+      <FormPersistenceExample />
+      <SettingsWithValidationExample />
     </div>
   );
 }
