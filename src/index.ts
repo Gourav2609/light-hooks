@@ -1,5 +1,10 @@
 // Mobile detection hook
-export { isMobile, type IsMobileOptions } from "./isMobile";
+export { 
+  useIsMobile, 
+  isMobile, // Deprecated: use useIsMobile instead
+  type UseIsMobileOptions,
+  type IsMobileOptions // Deprecated: use UseIsMobileOptions instead
+} from "./useIsMobile";
 
 // Click outside detection hook
 export {
