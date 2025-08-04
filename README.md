@@ -1,4 +1,7 @@
-# light-hooks
+<div align="center"><h1>Light Hooks</h1></div>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/7c84f1a0-f97e-4ab2-b522-a51a078fdcf5" alt="light-hooks banner" width="100%" />
+</div>
 
 A lightweight React hooks library built for performance and developer experience.
 
@@ -10,8 +13,6 @@ A lightweight React hooks library built for performance and developer experience
 ```bash
 npm install light-hooks
 ```
-
-Built by [Gourav2609](https://github.com/Gourav2609) with focus on performance and simplicity.
 
 ## ✨ Why light-hooks?
 
