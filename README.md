@@ -1,147 +1,90 @@
-# React Hooks Collection
+# light-hooks
 
-A collection of useful React hooks for common React development patterns. Build responsive and interactive components with ease.
+A lightweight React hooks library built for performance and developer experience.
 
-## Hooks Included
-
-### `isMobile`
-Detects mobile devices based on screen width with customizable breakpoints.
-
-### `useClickOutside`
-Detects clicks outside of a specified element - perfect for modals, dropdowns, and tooltips.
-
-### `useCountdown`
-A powerful countdown timer hook with multiple configuration options - perfect for timers, countdowns, and time-based features.
-
-### `usePing`
-Monitor network connectivity and measure latency to specific URLs with automatic or manual ping functionality.
-
-### `useHotKey`
-Handle keyboard shortcuts and hotkey combinations with modifier keys, custom options, and flexible configuration.
-
-### `useEvent`
-Handle multiple event listeners with flexible targeting options, event delegation, and performance optimizations.
-
-### `useLocalStorage`
-Persist state to localStorage with automatic JSON serialization, SSR safety, and cross-tab synchronization.
-
-## Features
-
-- 🚀 **Lightweight**: Minimal bundle size
-- 📱 **Responsive**: Automatically updates on window resize
-- ⚙️ **Customizable**: Configure your own breakpoint (default: 768px)
-- 🔧 **TypeScript**: Full TypeScript support with type definitions
-- 🌐 **SSR Ready**: Works with server-side rendering
-- ⚡ **Performance**: Efficient event handling with cleanup
-
-## Installation
+[![npm version](https://img.shields.io/npm/v/light-hooks.svg)](https://www.npmjs.com/package/light-hooks)
+[![npm downloads](https://img.shields.io/npm/dm/light-hooks.svg)](https://www.npmjs.com/package/light-hooks)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/light-hooks)](https://bundlephobia.com/package/light-hooks)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
 ```bash
 npm install light-hooks
 ```
 
-or
+Built by [Gourav2609](https://github.com/Gourav2609) with focus on performance and simplicity.
 
-```bash
-yarn add light-hooks
-```
+## ✨ Why light-hooks?
+
+**light-hooks** delivers production-ready React hooks that prioritize performance without sacrificing developer experience. Each hook is carefully optimized using modern browser APIs and best practices.
+
+- **🪶 Ultra-lightweight** — Tree-shakable with minimal runtime overhead
+- **⚡ Performance-first** — Uses ResizeObserver, stable refs, and optimized event handling  
+- **🎯 TypeScript native** — Written in TypeScript with complete type safety
+- **🔧 SSR compatible** — Zero hydration mismatches, works everywhere
+- **🎨 Developer friendly** — Intuitive APIs with comprehensive documentation
 
 ## Quick Start
 
 ```tsx
-import React from 'react';
-import { 
-  isMobile, 
-  useClickOutside, 
-  useCountdown, 
-  useLocalStorage 
-} from 'light-hooks';
+import { useLocalStorage, useIsMobile } from 'light-hooks'
 
-function MyComponent() {
-  // Mobile detection
-  const mobile = isMobile();
-  
-  // Click outside detection
-  const modalRef = useClickOutside(() => setIsOpen(false));
-  
-  // Countdown timer
-  const { timeLeft, start, pause, reset } = useCountdown(60);
-  
-  // Local storage persistence
-  const { value, setValue } = useLocalStorage('myData', { count: 0 });
-  
+export default function App() {
+  const [count, setCount] = useLocalStorage('counter', 0)
+  const isMobile = useIsMobile()
+
   return (
     <div>
-      <p>Device: {mobile ? 'Mobile' : 'Desktop'}</p>
-      <p>Countdown: {timeLeft}s</p>
-      <p>Stored count: {value.count}</p>
-      <div ref={modalRef}>Click outside to close</div>
+      <h1>{isMobile ? '📱' : '💻'} Counter: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
     </div>
-  );
+  )
 }
 ```
 
-## Documentation
+## 🎣 Hooks
 
-For comprehensive examples, API reference, and advanced usage patterns, visit our [Documentation Site](#).
+**`useIsMobile`** — Mobile device detection with ResizeObserver for zero-cost updates.
 
-## API Reference
+**`useClickOutside`** — Handle clicks outside elements. Perfect for modals and dropdowns.
 
-### `isMobile(options?)`
-```tsx
-const mobile = isMobile({ breakpoint: 768 });
-```
+**`useCountdown`** — Flexible countdown timers with start/pause/reset controls.
 
-### `useClickOutside(callback, options?)`
-```tsx
-const ref = useClickOutside(() => console.log('Outside click'));
-```
+**`useLocalStorage`** — Persistent state with automatic serialization and cross-tab sync.
 
-### `useCountdown(options)`
-```tsx
-const { timeLeft, start, pause, reset } = useCountdown(60);
-```
+**`usePing`** — Network connectivity monitoring with real-time latency measurement.
 
-### `useLocalStorage(key, initialValue, options?)`
-```tsx
-const { value, setValue, removeValue } = useLocalStorage('key', 'default');
-```
+**`useHotKey`** — Keyboard shortcuts with modifier keys and conflict-free bindings.
 
-### `usePing(options)`
-```tsx
-const { latency, isLive, ping } = usePing('https://api.example.com');
-```
+**`useEvent`** — Advanced event handling with delegation and performance optimization.
 
-### `useHotKey(config, callback, options?)`
-```tsx
-useHotKey('ctrl+s', () => console.log('Save'));
-```
+## 📚 Learn More
 
-### `useEvent(callback, events, config?)`
-```tsx
-useEvent((e) => console.log('Click'), 'click', { targetElements: 'button' });
-```
+Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
 
-## TypeScript Support
+## 🛠️ Contributing
 
-All hooks come with full TypeScript definitions:
+We welcome contributions! Check out our [contributing guide](https://github.com/Gourav2609/light-hooks/blob/main/CONTRIBUTING.md) to get started.
 
-```tsx
-import type { 
-  UseLocalStorageReturn,
-  UseCountdownOptions,
-  HotKeyConfig 
-} from 'light-hooks';
-```
+## 👥 Contributors
 
-## Contributing
+Thanks to these amazing people who have contributed to light-hooks:
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+<table>
+<tr>
+<td align="center">
+<a href="https://github.com/div02-afk">
+<img src="https://github.com/div02-afk.png" width="100px;" alt="div02-afk"/>
+<br />
+<sub><b>div02-afk</b></sub>
+</a>
+<br />
+<sub>New hooks implementation</sub>
+</td>
+</tr>
+</table>
 
-## License
+## 📝 License
 
 MIT © [Gourav2609](https://github.com/Gourav2609)
-
-## Repository
-
-[GitHub Repository](https://github.com/Gourav2609/isMobile)
