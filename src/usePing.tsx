@@ -135,7 +135,11 @@ export const usePing = (options: PingOptions | string): PingResult => {
 
   // Set up automatic pinging if autoStart is enabled
   useEffect(() => {
-    if (!autoStart) return;
+    if (!autoStart) {
+      // Clean up any existing state when autoStart is false
+      setIsLoading(false);
+      return;
+    }
 
     setIsLoading(true);
 
@@ -152,6 +156,7 @@ export const usePing = (options: PingOptions | string): PingResult => {
     // Cleanup interval when component unmounts or dependencies change
     return () => {
       clearInterval(pingInterval);
+      setIsLoading(false);
     };
   }, [processLatency, interval, autoStart]);
 

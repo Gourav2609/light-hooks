@@ -1,5 +1,10 @@
 // Mobile detection hook
-export { isMobile, type IsMobileOptions } from "./isMobile";
+export { 
+  useIsMobile, 
+  isMobile, // Deprecated: use useIsMobile instead
+  type UseIsMobileOptions,
+  type IsMobileOptions // Deprecated: use UseIsMobileOptions instead
+} from "./useIsMobile";
 
 // Click outside detection hook
 export {
@@ -27,13 +32,18 @@ export {
 // Event handler hook
 export { useEvent, type EventOptions,type EventGlobalConfig } from "./useEvent";
 
-
 export {
   usePermission,
   type usePermissionOptions,
   type usePermissionResult,
 } from "./usePermission";
 
+// LocalStorage hook
+export {
+  useLocalStorage,
+  type UseLocalStorageReturn,
+  type UseLocalStorageOptions,
+} from "./useLocalStorage";
+
 // Future hooks will be exported here
-// export { useLocalStorage } from './useLocalStorage';
 // export { useDebounce } from './useDebounce';

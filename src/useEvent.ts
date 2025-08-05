@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useMemo } from "react";
 
 /** Configuration for a single event listener */
 export interface EventOptions {
@@ -25,7 +25,7 @@ export interface EventGlobalConfig {
 }
 
 /** Internal structure for tracking active event listeners */
- interface ElementCallback {
+interface ElementCallback {
   /** The event type being listened to */
   event: string;
   /** HTML elements that have this listener attached */

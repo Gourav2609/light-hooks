@@ -1,747 +1,90 @@
-# React Hooks Collection
+# light-hooks
 
-A collection of useful React hooks for common React development patterns. Build responsive and interactive components with ease.
+A lightweight React hooks library built for performance and developer experience.
 
-## Hooks Included
-
-### `isMobile`
-Detects mobile devices based on screen width with customizable breakpoints.
-
-### `useClickOutside`
-Detects clicks outside of a specified element - perfect for modals, dropdowns, and tooltips.
-
-### `useCountdown`
-A powerful countdown timer hook with multiple configuration options - perfect for timers, countdowns, and time-based features.
-
-### `usePing`
-Monitor network connectivity and measure latency to specific URLs with automatic or manual ping functionality.
-
-### `useHotKey`
-Handle keyboard shortcuts and hotkey combinations with modifier keys, custom options, and flexible configuration.
-
-### `useEvent`
-Handle multiple event listeners with flexible targeting options, event delegation, and performance optimizations.
-
-## Features
-
-- 🚀 **Lightweight**: Minimal bundle size
-- 📱 **Responsive**: Automatically updates on window resize
-- ⚙️ **Customizable**: Configure your own breakpoint (default: 768px)
-- 🔧 **TypeScript**: Full TypeScript support with type definitions
-- 🌐 **SSR Ready**: Works with server-side rendering
-- ⚡ **Performance**: Efficient event handling with cleanup
-
-## Installation
+[![npm version](https://img.shields.io/npm/v/light-hooks.svg)](https://www.npmjs.com/package/light-hooks)
+[![npm downloads](https://img.shields.io/npm/dm/light-hooks.svg)](https://www.npmjs.com/package/light-hooks)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/light-hooks)](https://bundlephobia.com/package/light-hooks)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
 ```bash
 npm install light-hooks
 ```
 
-or
+Built by [Gourav2609](https://github.com/Gourav2609) with focus on performance and simplicity.
 
-```bash
-yarn add light-hooks
-```
+## ✨ Why light-hooks?
 
-## Usage
+**light-hooks** delivers production-ready React hooks that prioritize performance without sacrificing developer experience. Each hook is carefully optimized using modern browser APIs and best practices.
 
-### Basic Usage
+- **🪶 Ultra-lightweight** — Tree-shakable with minimal runtime overhead
+- **⚡ Performance-first** — Uses ResizeObserver, stable refs, and optimized event handling  
+- **🎯 TypeScript native** — Written in TypeScript with complete type safety
+- **🔧 SSR compatible** — Zero hydration mismatches, works everywhere
+- **🎨 Developer friendly** — Intuitive APIs with comprehensive documentation
+
+## Quick Start
 
 ```tsx
-import React from 'react';
-import { isMobile } from 'light-hooks';
+import { useLocalStorage, useIsMobile } from 'light-hooks'
 
-function MyComponent() {
-  const mobile = isMobile(); // Uses default 768px breakpoint
+export default function App() {
+  const [count, setCount] = useLocalStorage('counter', 0)
+  const isMobile = useIsMobile()
 
   return (
     <div>
-      {mobile ? (
-        <h1>📱 Mobile View</h1>
-      ) : (
-        <h1>🖥️ Desktop View</h1>
-      )}
-    </div>
-  );
-}
-```
-
-### Custom Breakpoint
-
-```tsx
-import React from 'react';
-import { isMobile } from 'light-hooks';
-
-function MyComponent() {
-  const mobile = isMobile({ breakpoint: 640 }); // Custom breakpoint at 640px
-
-  return (
-    <div>
-      {mobile ? 'Small screen detected' : 'Large screen detected'}
-    </div>
-  );
-}
-```
-
-### Conditional Styling
-
-```tsx
-import React from 'react';
-import { isMobile } from 'light-hooks';
-
-function Navigation() {
-  const mobile = isMobile();
-
-  return (
-    <nav style={{
-      flexDirection: mobile ? 'column' : 'row',
-      padding: mobile ? '10px' : '20px'
-    }}>
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  );
-}
-```
-
-### Multiple Breakpoints
-
-```tsx
-import React from 'react';
-import { isMobile } from 'light-hooks';
-
-function ResponsiveComponent() {
-  const mobile = isMobile({ breakpoint: 768 });
-  const tablet = isMobile({ breakpoint: 1024 });
-
-  if (mobile) {
-    return <div>Mobile Layout</div>;
-  }
-  
-  if (tablet) {
-    return <div>Tablet Layout</div>;
-  }
-  
-  return <div>Desktop Layout</div>;
-}
-```
-
-## API Reference
-
-### `isMobile(options?)`
-
-#### Parameters
-
-- `options` (optional): Configuration object
-  - `breakpoint` (optional): Number - The pixel width below which the device is considered mobile. Default: `768`
-
-#### Returns
-
-- `boolean`: `true` if the current screen width is below the breakpoint, `false` otherwise
-
-#### Types
-
-```typescript
-interface IsMobileOptions {
-  breakpoint?: number;
-}
-
-declare const isMobile: (options?: IsMobileOptions) => boolean;
-```
-
-### `useClickOutside(callback, options?)`
-
-Detects clicks outside of a specified element and executes a callback function.
-
-#### Basic Usage
-
-```tsx
-import React, { useState } from 'react';
-import { useClickOutside } from 'light-hooks';
-
-function Modal({ isOpen, onClose }) {
-  const modalRef = useClickOutside(onClose);
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal-overlay">
-      <div ref={modalRef} className="modal-content">
-        <h2>Modal Title</h2>
-        <p>Click outside to close</p>
-      </div>
-    </div>
-  );
-}
-```
-
-#### Advanced Usage with Options
-
-```tsx
-import React, { useState } from 'react';
-import { useClickOutside } from 'light-hooks';
-
-function Dropdown({ isOpen, onClose }) {
-  const dropdownRef = useClickOutside(onClose, {
-    enabled: isOpen, // Only listen when dropdown is open
-    events: ['mousedown'] // Only listen for mousedown events
-  });
-
-  return (
-    <div style={{ position: 'relative' }}>
-      <button onClick={() => setIsOpen(!isOpen)}>
-        Toggle Dropdown
-      </button>
-      {isOpen && (
-        <div ref={dropdownRef} className="dropdown-menu">
-          <div>Option 1</div>
-          <div>Option 2</div>
-          <div>Option 3</div>
-        </div>
-      )}
-    </div>
-  );
-}
-```
-
-#### Parameters
-
-- `callback`: Function - Called when a click outside the element is detected
-- `options` (optional): Configuration object
-  - `enabled` (optional): Boolean - Whether the hook is active. Default: `true`
-  - `events` (optional): String[] - Array of events to listen for. Default: `['mousedown', 'touchstart']`
-
-#### Returns
-
-- `RefObject<T>`: React ref object to attach to the element you want to detect outside clicks for
-
-#### Types
-
-```tsx
-interface UseClickOutsideOptions {
-  enabled?: boolean;
-  events?: string[];
-}
-
-declare const useClickOutside: <T extends HTMLElement = HTMLElement>(
-  callback: () => void,
-  options?: UseClickOutsideOptions
-) => RefObject<T>;
-```
-
-### `useCountdown(options)`
-
-A versatile countdown timer hook that supports multiple input formats and provides comprehensive timer controls.
-
-#### Basic Usage with Seconds
-
-```tsx
-import React from 'react';
-import { useCountdown } from 'light-hooks';
-
-function BasicTimer() {
-  const { timeLeft, formattedTime } = useCountdown({ initialSeconds: 60 });
-
-  return (
-    <div>
-      <h3>Countdown: {timeLeft} seconds</h3>
-      <p>
-        Time: {formattedTime.minutes}:
-        {formattedTime.seconds.toString().padStart(2, '0')}
-      </p>
-    </div>
-  );
-}
-```
-
-#### Advanced Usage with Controls
-
-```tsx
-import React from 'react';
-import { useCountdown } from 'light-hooks';
-
-function TimerWithControls() {
-  const {
-    timeLeft,
-    isActive,
-    isCompleted,
-    start,
-    pause,
-    reset,
-    formattedTime,
-  } = useCountdown({
-    initialSeconds: 300, // 5 minutes
-    autoStart: false,
-    onComplete: () => alert('Timer finished!')
-  });
-
-  return (
-    <div>
-      <h2>Timer: {formattedTime.minutes}:{formattedTime.seconds.toString().padStart(2, '0')}</h2>
-      <p>Status: {isActive ? 'Running' : 'Paused'}</p>
-      
-      <button onClick={start} disabled={isActive || isCompleted}>
-        Start
-      </button>
-      <button onClick={pause} disabled={!isActive}>
-        Pause
-      </button>
-      <button onClick={reset}>
-        Reset
-      </button>
-      
-      {isCompleted && <p>🎉 Timer completed!</p>}
-    </div>
-  );
-}
-```
-
-#### Countdown to Specific Date
-
-```tsx
-import React from 'react';
-import { useCountdown } from 'light-hooks';
-
-function EventCountdown() {
-  const targetDate = new Date('2024-12-31T23:59:59');
-  const { formattedTime, isCompleted } = useCountdown(targetDate);
-
-  if (isCompleted) {
-    return <h1>🎊 Happy New Year!</h1>;
-  }
-
-  return (
-    <div>
-      <h2>New Year Countdown</h2>
-      <p>
-        {formattedTime.days} days, {formattedTime.hours} hours,{' '}
-        {formattedTime.minutes} minutes, {formattedTime.seconds} seconds
-      </p>
-    </div>
-  );
-}
-```
-
-#### Multiple Input Formats
-
-```tsx
-// Using seconds
-const countdown1 = useCountdown(60);
-
-// Using date object
-const countdown2 = useCountdown(new Date('2024-12-31'));
-
-// Using options object
-const countdown3 = useCountdown({
-  initialSeconds: 300,
-  onComplete: () => console.log('Done!'),
-  autoStart: false
-});
-```
-
-#### Parameters
-
-- `options`: Can be a number (seconds), Date object, or configuration object:
-  - `targetDate` (optional): Date - Countdown to this specific date
-  - `initialSeconds` (optional): Number - Initial countdown time in seconds
-  - `onComplete` (optional): Function - Called when countdown reaches zero
-  - `autoStart` (optional): Boolean - Whether to start automatically. Default: `true`
-  - `interval` (optional): Number - Update interval in milliseconds. Default: `1000`
-
-#### Returns
-
-- `timeLeft`: Number - Remaining time in seconds
-- `isActive`: Boolean - Whether the countdown is currently running
-- `isCompleted`: Boolean - Whether the countdown has finished
-- `start`: Function - Start/resume the countdown
-- `pause`: Function - Pause the countdown
-- `reset`: Function - Reset to initial time
-- `formattedTime`: Object - Time broken down into days, hours, minutes, seconds
-
-#### Types
-
-```tsx
-interface UseCountdownOptions {
-  targetDate?: Date;
-  initialSeconds?: number;
-  onComplete?: () => void;
-  autoStart?: boolean;
-  interval?: number;
-}
-
-interface CountdownReturn {
-  timeLeft: number;
-  isActive: boolean;
-  isCompleted: boolean;
-  start: () => void;
-  pause: () => void;
-  reset: () => void;
-  formattedTime: {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
-}
-
-declare const useCountdown: (
-  options: UseCountdownOptions | Date | number
-) => CountdownReturn;
-```
-
-## Common Breakpoints
-
-Here are some common breakpoints you might want to use:
-
-- **320px**: Small mobile devices
-- **480px**: Mobile devices
-- **640px**: Small tablets
-- **768px**: Tablets (default)
-- **1024px**: Small laptops
-- **1280px**: Laptops/Desktops
-
-## Server-Side Rendering (SSR)
-
-The hook is SSR-friendly and will return `false` during server-side rendering to prevent hydration mismatches. The correct value will be set on the client after hydration.
-
-## Browser Support
-
-This hook works in all modern browsers that support:
-- ES2015+
-- React 16.8+ (hooks)
-- `window.addEventListener`
-- `window.innerWidth`
-
-## Roadmap
-
-More hooks are coming soon! Planned additions include:
-- `useLocalStorage` - Local storage management
-- `useDebounce` - Debounced values
-- ✅ `useClickOutside` - Detect clicks outside elements (Available now!)
-- ✅ `useCountdown` - Timer and countdown functionality (Available now!)
-- `useWindowSize` - Window dimensions tracking
-- `useMediaQuery` - CSS media query matching
-- `useToggle` - Simple boolean state management
-- `usePrevious` - Access previous values
-
----
-
-## `useHotKey` Hook
-
-The `useHotKey` hook provides a powerful and flexible way to handle keyboard shortcuts and hotkey combinations in your React applications. It supports modifier keys, custom options, and can handle both simple key presses and complex key combinations.
-
-### Features
-
-- ⌨️ **Simple and Complex Hotkeys**: Handle both single keys and key combinations
-- 🔧 **Modifier Keys**: Support for Ctrl, Alt, Shift, and Meta (Cmd) keys
-- 🎯 **Multiple Configurations**: Define multiple hotkey combinations for a single action
-- 🛡️ **Input Field Protection**: Automatically ignores hotkeys when typing in input fields
-- ⚙️ **Customizable Options**: Control preventDefault, stopPropagation, and target elements
-- 🎮 **Event Access**: Callback receives the original KeyboardEvent
-- 🔄 **Enable/Disable**: Dynamically enable or disable hotkeys
-
-### Basic Usage
-
-```typescript
-import { useHotKey } from 'light-hooks';
-
-function MyComponent() {
-  // Simple key binding
-  useHotKey('Enter', (event) => {
-    console.log('Enter pressed!');
-  });
-
-  // Key combination with modifier
-  useHotKey(
-    { key: 's', modifiers: ['ctrl'], preventDefault: true },
-    (event) => {
-      console.log('Ctrl+S pressed - Save action!');
-    }
-  );
-
-  return <div>Press Enter or Ctrl+S</div>;
-}
-```
-
-### Advanced Usage
-
-```typescript
-import { useHotKey } from 'light-hooks';
-
-function AdvancedComponent() {
-  const [isEnabled, setIsEnabled] = useState(true);
-
-  // Multiple key combinations for the same action
-  useHotKey([
-    { key: 'c', modifiers: ['ctrl'] },  // Ctrl+C on Windows/Linux
-    { key: 'c', modifiers: ['meta'] }   // Cmd+C on Mac
-  ], (event) => {
-    console.log('Copy action triggered!');
-  });
-
-  // Function keys
-  useHotKey('F1', (event) => {
-    console.log('Help triggered!');
-  });
-
-  // Arrow keys for navigation
-  useHotKey('ArrowUp', (event) => {
-    console.log('Navigate up');
-  });
-
-  // Conditional hotkey
-  useHotKey(
-    { key: 'r', modifiers: ['ctrl'] },
-    (event) => {
-      console.log('Refresh triggered!');
-    },
-    { 
-      enabled: isEnabled,
-      preventDefault: true,
-      ignoreInputFields: false  // Allow in input fields
-    }
-  );
-
-  return (
-    <div>
-      <button onClick={() => setIsEnabled(!isEnabled)}>
-        {isEnabled ? 'Disable' : 'Enable'} Ctrl+R
+      <h1>{isMobile ? '📱' : '💻'} Counter: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
       </button>
     </div>
-  );
+  )
 }
 ```
 
-### Parameters
+## 🎣 Hooks
 
-#### `useHotKey(hotKeyConfig, callback, options?)`
+**`useIsMobile`** — Mobile device detection with ResizeObserver for zero-cost updates.
 
-- **`hotKeyConfig`**: `HotKeyConfig | HotKey | (HotKeyConfig | HotKey)[]`
-  - Configuration for the hotkey(s) to listen for
-  - Can be a simple key string, a configuration object, or an array of either
+**`useClickOutside`** — Handle clicks outside elements. Perfect for modals and dropdowns.
 
-- **`callback`**: `(event: KeyboardEvent) => void`
-  - Function to call when the hotkey is triggered
-  - Receives the original KeyboardEvent as parameter
+**`useCountdown`** — Flexible countdown timers with start/pause/reset controls.
 
-- **`options`**: `UseHotKeyOptions` (optional)
-  - Additional configuration options
+**`useLocalStorage`** — Persistent state with automatic serialization and cross-tab sync.
 
-### Returns
+**`usePing`** — Network connectivity monitoring with real-time latency measurement.
 
-#### `UseHotKeyResult`
+**`useHotKey`** — Keyboard shortcuts with modifier keys and conflict-free bindings.
 
-```typescript
-{
-  isPressed: boolean  // Whether the hotkey is currently being pressed
-}
-```
+**`useEvent`** — Advanced event handling with delegation and performance optimization.
 
-### Types
+## 📚 Learn More
 
-#### `HotKeyConfig`
+Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
 
-```typescript
-interface HotKeyConfig {
-  key: HotKey;                    // The main key
-  modifiers?: ModifierKey[];      // Optional modifier keys
-  preventDefault?: boolean;       // Prevent default browser behavior
-  stopPropagation?: boolean;      // Stop event propagation
-}
-```
+## 🛠️ Contributing
 
-#### `UseHotKeyOptions`
+We welcome contributions! Check out our [contributing guide](https://github.com/Gourav2609/light-hooks/blob/main/CONTRIBUTING.md) to get started.
 
-```typescript
-interface UseHotKeyOptions {
-  enabled?: boolean;              // Enable/disable the hotkey (default: true)
-  preventDefault?: boolean;       // Global preventDefault setting
-  stopPropagation?: boolean;      // Global stopPropagation setting
-  target?: HTMLElement | Document; // Target element to listen on (default: document)
-  ignoreInputFields?: boolean;    // Ignore hotkeys in input fields (default: true)
-}
-```
+## 👥 Contributors
 
-#### `ModifierKey`
+Thanks to these amazing people who have contributed to light-hooks:
 
-```typescript
-type ModifierKey = 'ctrl' | 'alt' | 'shift' | 'meta';
-```
+<table>
+<tr>
+<td align="center">
+<a href="https://github.com/div02-afk">
+<img src="https://github.com/div02-afk.png" width="100px;" alt="div02-afk"/>
+<br />
+<sub><b>div02-afk</b></sub>
+</a>
+<br />
+<sub>New hooks implementation</sub>
+</td>
+</tr>
+</table>
 
-#### `HotKey`
-
-Supports all standard keyboard keys including:
-- **Letters**: `'a'` to `'z'`
-- **Numbers**: `'0'` to `'9'`
-- **Function Keys**: `'F1'` to `'F12'`
-- **Special Keys**: `'Enter'`, `'Escape'`, `'Tab'`, `'Space'`, etc.
-- **Arrow Keys**: `'ArrowUp'`, `'ArrowDown'`, `'ArrowLeft'`, `'ArrowRight'`
-- **Symbols**: `'!'`, `'@'`, `'#'`, etc.
-
-### Examples
-
-The library includes comprehensive examples in `UseHotKeyExamples.tsx`:
-
-- Simple key bindings
-- Modifier key combinations
-- Multiple hotkey configurations
-- Function key usage
-- Conditional hotkey enabling
-- Cross-platform compatibility (Ctrl vs Cmd)
-- Arrow key navigation
-- Number and symbol shortcuts
-
----
-
-## `useEvent` Hook
-
-The `useEvent` hook provides advanced event handling capabilities with flexible element targeting, event delegation patterns, and performance optimizations. Perfect for complex applications requiring sophisticated event management.
-
-### Features
-
-- 🎯 **Flexible Targeting**: Target elements by ID, tag name, or both
-- 🔄 **Multiple Events**: Handle different event types with single hook
-- ⚡ **Event Delegation**: Efficient handling of dynamic content
-- ⚙️ **Advanced Options**: Support for passive, capture, and once options
-- 🎮 **Dynamic Config**: Real-time configuration updates
-- 🧹 **Auto Cleanup**: Automatic event listener cleanup on unmount
-- 📊 **Performance**: Optimized for high-frequency events
-
-### Basic Usage
-
-```typescript
-import { useEvent } from 'light-hooks';
-
-function MyComponent() {
-  // Simple event binding to all buttons
-  useEvent(
-    (e) => console.log('Button clicked:', e.target),
-    'click',
-    { targetElements: 'button' }
-  );
-
-  // Multiple events with specific targeting
-  useEvent(
-    (e) => console.log('Event:', e.type),
-    [
-      { event: 'click', ids: 'submit-btn' },
-      { event: 'mouseover', targetElements: ['button', 'a'] }
-    ],
-    { targetElements: 'div' }
-  );
-
-  return <div>/* Your JSX */</div>;
-}
-```
-
-### Advanced Usage
-
-```typescript
-import { useEvent } from 'light-hooks';
-
-function AdvancedComponent() {
-  // Event delegation for dynamic content
-  useEvent(
-    (e) => {
-      const target = e.target as HTMLElement;
-      if (target.classList.contains('delete-btn')) {
-        const id = target.dataset.itemId;
-        deleteItem(id);
-      }
-    },
-    'click',
-    { targetElements: 'button' }
-  );
-
-  // Performance-optimized scroll handling
-  useEvent(
-    (e) => handleScroll(e),
-    {
-      event: 'scroll',
-      targetElements: 'div',
-      options: { passive: true }
-    },
-    {}
-  );
-
-  // Capture phase event handling
-  useEvent(
-    (e) => interceptAllClicks(e),
-    {
-      event: 'click',
-      targetElements: 'body',
-      options: { capture: true }
-    },
-    {}
-  );
-
-  return <div>/* Your JSX */</div>;
-}
-```
-
-### Parameters
-
-#### `useEvent(callback, eventOptions, globalConfig?)`
-
-- **`callback`**: `(event: Event) => void`
-  - Function called when events are triggered
-  - Receives the native Event object
-
-- **`eventOptions`**: `EventOptions | EventOptions[] | string`
-  - String: Simple event name (uses global config for targeting)
-  - Object: Detailed event configuration
-  - Array: Multiple event configurations
-
-- **`globalConfig`**: `EventGlobalConfig` (optional)
-  - Default configuration for all events
-  - Individual event configs override global settings
-
-### Types
-
-#### `EventOptions`
-
-```typescript
-interface EventOptions {
-  event: string;                          // Event type ('click', 'scroll', etc.)
-  targetElements?: string | string[];     // Target by tag name
-  ids?: string | string[];                // Target by element ID
-  callback?: (event: Event) => void;      // Event-specific callback
-  options?: AddEventListenerOptions;      // Native addEventListener options
-}
-```
-
-#### `EventGlobalConfig`
-
-```typescript
-interface EventGlobalConfig {
-  targetElements?: string | string[];     // Default target elements
-  ids?: string | string[];                // Default target IDs
-  options?: AddEventListenerOptions;      // Default listener options
-}
-```
-
-### Examples
-
-The library includes comprehensive examples in `UseEventExamples.tsx`:
-
-- Simple event binding with automatic targeting
-- Multiple event types with flexible configuration
-- Event delegation patterns for dynamic content
-- Advanced options (passive, capture, once)
-- Dynamic configuration updates
-- Performance optimization techniques
-
----
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
+## 📝 License
 
 MIT © [Gourav2609](https://github.com/Gourav2609)
-
-## Repository
-
-[GitHub Repository](https://github.com/Gourav2609/isMobile)
