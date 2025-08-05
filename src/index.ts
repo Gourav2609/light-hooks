@@ -27,6 +27,13 @@ export {
 // Event handler hook
 export { useEvent, type EventOptions,type EventGlobalConfig } from "./useEvent";
 
+
+export {
+  usePermission,
+  type usePermissionOptions,
+  type usePermissionResult,
+} from "./usePermission";
+
 // Future hooks will be exported here
 // export { useLocalStorage } from './useLocalStorage';
 // export { useDebounce } from './useDebounce';

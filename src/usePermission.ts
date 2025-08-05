@@ -4,13 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 type PermissionType = PermissionName | PermissionDescriptor;
 
 /** Configuration options for the usePermission hook */
-type usePermissionOptions =
+export type usePermissionOptions =
   | PermissionName
   | PermissionDescriptor
   | PermissionType[];
 
 /** Return values from the usePermission hook */
-interface usePermissionResult {
+export interface usePermissionResult {
   /** Array of current permission statuses for all requested permissions */
   permissionStatus: PermissionStatus[];
   /** Function to request permissions from the user (may show prompts) */
