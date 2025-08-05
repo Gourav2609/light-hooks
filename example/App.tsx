@@ -27,6 +27,7 @@ import {
   FormPersistenceExample,
   SettingsWithValidationExample,
 } from "./UseLocalStorageExamples";
+import UseScrollExamples from "./UseScrollExamples";
 
 // Main App component
 function App() {
@@ -109,6 +110,17 @@ function App() {
       <ShoppingCartExample />
       <FormPersistenceExample />
       <SettingsWithValidationExample />
+
+      {/* useScroll Hook Examples */}
+      <div
+        style={{
+          marginTop: "40px",
+          borderTop: "2px solid #eee",
+          paddingTop: "20px",
+        }}
+      >
+        <UseScrollExamples />
+      </div>
     </div>
   );
 }
