@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useScroll } from "../src/useScroll";
+import { useScroll } from "light-hooks";
 
 const UseScrollExamples: React.FC = () => {
   return (
