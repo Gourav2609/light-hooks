@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useEvent } from "../src/useEvent";
+import { useEvent } from "light-hooks";
 
 // Simple Event Binding Example
 export const SimpleEventExample: React.FC = () => {
