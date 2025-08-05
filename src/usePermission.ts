@@ -196,7 +196,7 @@ export const usePermission = (
     };
 
     // Add event listeners to each permission status object
-    permissionStatus.forEach((status, index) => {
+    permissionStatus.forEach((status) => {
       if (status && typeof status.addEventListener === "function") {
         status.addEventListener("change", handleChange);
         listeners.push(() =>
