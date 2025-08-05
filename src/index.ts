@@ -51,6 +51,12 @@ export {
   type ScrollDirection,
 } from "./useScroll";
 
+export {
+  usePermission,
+  type usePermissionOptions,
+  type usePermissionResult,
+} from "./usePermission";
+
 // LocalStorage hook
 export {
   useLocalStorage,

@@ -20,6 +20,7 @@ import {
 } from "./UsePingExamples";
 import { UseHotKeyExamples } from "./UseHotKeyExamples";
 import { UseEventExamples } from "./UseEventExamples";
+import UsePermissionExamples from "./UsePermissionExamples";
 import {
   BasicLocalStorageExample,
   UserPreferencesExample,
@@ -28,6 +29,7 @@ import {
   SettingsWithValidationExample,
 } from "./UseLocalStorageExamples";
 import UseScrollExamples from "./UseScrollExamples";
+
 
 // Main App component
 function App() {
@@ -101,6 +103,18 @@ function App() {
         }}
       >
         <UseEventExamples />
+      </div>
+
+
+      {/* usePermission Hook Examples */}
+      <div
+        style={{
+          marginTop: "40px",
+          borderTop: "2px solid #eee",
+          paddingTop: "20px",
+        }}
+      >
+        <UsePermissionExamples />
       </div>
 
       {/* useLocalStorage Hook Examples */}
