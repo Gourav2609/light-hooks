@@ -1,9 +1,9 @@
 // Mobile detection hook
-export { 
-  useIsMobile, 
+export {
+  useIsMobile,
   isMobile, // Deprecated: use useIsMobile instead
   type UseIsMobileOptions,
-  type IsMobileOptions // Deprecated: use UseIsMobileOptions instead
+  type IsMobileOptions, // Deprecated: use UseIsMobileOptions instead
 } from "./useIsMobile";
 
 // Click outside detection hook
@@ -30,7 +30,27 @@ export {
 } from "./useHotKey";
 
 // Event handler hook
-export { useEvent, type EventOptions,type EventGlobalConfig } from "./useEvent";
+export {
+  useEvent,
+  type EventOptions,
+  type EventGlobalConfig,
+} from "./useEvent";
+
+// Permission hook
+export {
+  usePermission,
+  type usePermissionOptions,
+  type usePermissionResult,
+} from "./usePermission";
+
+// Scroll hook
+export {
+  useScroll,
+  type ScrollOptions,
+  type ScrollResult,
+  type ScrollDirection,
+} from "./useScroll";
+
 
 // LocalStorage hook
 export {

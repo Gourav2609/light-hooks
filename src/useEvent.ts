@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useMemo } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 /** Configuration for a single event listener */
 export interface EventOptions {
@@ -12,7 +12,7 @@ export interface EventOptions {
   callback?: (event: Event) => void;
   /** Additional options for addEventListener (capture, passive, once) */
   options?: AddEventListenerOptions;
-}
+}` `
 
 /** Global configuration that serves as fallback for individual event options */
 export interface EventGlobalConfig {
