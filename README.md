@@ -60,6 +60,10 @@ export default function App() {
 
 **`useEvent`** — Advanced event handling with delegation and performance optimization.
 
+**`usePermission`** — Browser permissions management with unified API for camera, microphone, notifications.
+
+**`useScroll`** — Advanced scroll monitoring with direction tracking, velocity, and scroll locking controls.
+
 ## 📚 Learn More
 
 Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
