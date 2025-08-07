@@ -59,6 +59,8 @@ export default function App() {
 
 **`useEvent`** — Advanced event handling with delegation and performance optimization.
 
+
+
 ## 📚 Learn More
 
 Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
