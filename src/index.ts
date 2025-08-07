@@ -59,5 +59,54 @@ export {
   type UseLocalStorageOptions,
 } from "./useLocalStorage";
 
+// Debounce hook
+export {
+  useDebounce,
+  type UseDebounceOptions,
+} from "./useDebounce";
+
+// Geolocation hook
+export {
+  useGeolocation,
+  type UseGeolocationOptions,
+  type UseGeolocationReturn,
+  type GeolocationCoordinates,
+} from "./useGeolocation";
+
+// Idle detection hook
+export {
+  useIdle,
+  type UseIdleOptions,
+  type UseIdleReturn,
+} from "./useIdle";
+
+// Throttle hook
+export {
+  useThrottle,
+  useThrottleCallback,
+  type UseThrottleOptions,
+  type UseThrottleCallbackReturn,
+} from "./useThrottle";
+
+// Fetch hook
+export {
+  useFetch,
+  type UseFetchOptions,
+  type UseFetchReturn,
+  type FetchMethod,
+} from "./useFetch";
+
+// Toggle hook
+export {
+  useToggle,
+  type UseToggleReturn,
+} from "./useToggle";
+
+// Copy to clipboard hook
+export {
+  useCopyToClipboard,
+  type UseCopyToClipboardOptions,
+  type UseCopyToClipboardReturn,
+} from "./useCopyToClipboard";
+
 // Future hooks will be exported here
-// export { useDebounce } from './useDebounce';

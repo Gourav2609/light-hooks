@@ -64,6 +64,20 @@ export default function App() {
 
 **`useScroll`** — Advanced scroll monitoring with direction tracking, velocity, and scroll locking controls.
 
+**`useDebounce`** — Delay value updates until activity stops. Essential for search inputs and API calls.
+
+**`useThrottle`** — Rate-limit function execution at regular intervals. Perfect for scroll and resize handlers.
+
+**`useGeolocation`** — User location access with permissions, error handling, and position watching.
+
+**`useIdle`** — User inactivity detection with configurable timeout and cross-tab synchronization.
+
+**`useFetch`** — Complete data fetching with loading states, caching, retries, and request cancellation.
+
+**`useToggle`** — Simple boolean state management with toggle, setTrue, setFalse controls.
+
+**`useCopyToClipboard`** — Copy text to clipboard with modern API, fallback support, and user feedback.
+
 ## 📚 Learn More
 
 Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
