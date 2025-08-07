@@ -1,6 +1,6 @@
 {
   "name": "light-hooks",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "A comprehensive collection of performant React hooks for modern web development",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
