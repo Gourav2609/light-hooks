@@ -1,7 +1,7 @@
 {
   "name": "light-hooks",
-  "version": "2.5.0",
-  "description": "A collection of useful React hooks including mobile device detection",
+  "version": "2.7.1",
+  "description": "A comprehensive collection of performant React hooks for modern web development",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,11 @@
     "breakpoint",
     "typescript",
     "react-hooks",
-    "utilities"
+    "utilities",
+    "permissions",
+    "scroll",
+    "browser-api",
+    "performance"
   ],
   "author": "Gourav2609",
   "license": "MIT",
