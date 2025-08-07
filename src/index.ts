@@ -51,7 +51,6 @@ export {
   type ScrollDirection,
 } from "./useScroll";
 
-
 // LocalStorage hook
 export {
   useLocalStorage,
@@ -60,10 +59,7 @@ export {
 } from "./useLocalStorage";
 
 // Debounce hook
-export {
-  useDebounce,
-  type UseDebounceOptions,
-} from "./useDebounce";
+export { useDebounce, type UseDebounceOptions } from "./useDebounce";
 
 // Geolocation hook
 export {
@@ -74,11 +70,7 @@ export {
 } from "./useGeolocation";
 
 // Idle detection hook
-export {
-  useIdle,
-  type UseIdleOptions,
-  type UseIdleReturn,
-} from "./useIdle";
+export { useIdle, type UseIdleOptions, type UseIdleReturn } from "./useIdle";
 
 // Throttle hook
 export {
@@ -97,10 +89,7 @@ export {
 } from "./useFetch";
 
 // Toggle hook
-export {
-  useToggle,
-  type UseToggleReturn,
-} from "./useToggle";
+export { useToggle, type UseToggleReturn } from "./useToggle";
 
 // Copy to clipboard hook
 export {
@@ -108,5 +97,12 @@ export {
   type UseCopyToClipboardOptions,
   type UseCopyToClipboardReturn,
 } from "./useCopyToClipboard";
+
+// Polling hook
+export {
+  usePolling,
+  type UsePollingOptions,
+  type UsePollingResults,
+} from "./usePolling";
 
 // Future hooks will be exported here
