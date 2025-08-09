@@ -80,6 +80,8 @@ export default function App() {
 
 **`usePolling`** — Data polling with interval and long polling support, retry logic, and comprehensive error handling.
 
+**`useWebSocket`** — Real-time data streaming with automatic reconnection and message handling.
+
 ## 📚 Learn More
 
 Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
