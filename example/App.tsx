@@ -29,7 +29,7 @@ import {
   SettingsWithValidationExample,
 } from "./UseLocalStorageExamples";
 import UseScrollExamples from "./UseScrollExamples";
-
+import { UsePollingExamples } from "./UsePollingExamples";
 
 // Main App component
 function App() {
@@ -105,7 +105,6 @@ function App() {
         <UseEventExamples />
       </div>
 
-
       {/* usePermission Hook Examples */}
       <div
         style={{
@@ -134,6 +133,17 @@ function App() {
         }}
       >
         <UseScrollExamples />
+      </div>
+
+      {/* usePolling Hook Examples */}
+      <div
+        style={{
+          marginTop: "40px",
+          borderTop: "2px solid #eee",
+          paddingTop: "20px",
+        }}
+      >
+        <UsePollingExamples />
       </div>
     </div>
   );

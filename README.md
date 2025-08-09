@@ -78,6 +78,8 @@ export default function App() {
 
 **`useCopyToClipboard`** — Copy text to clipboard with modern API, fallback support, and user feedback.
 
+**`usePolling`** — Data polling with interval and long polling support, retry logic, and comprehensive error handling.
+
 ## 📚 Learn More
 
 Visit [lighthooks.com](https://www.lighthooks.com/) for detailed documentation, examples, and API references.
